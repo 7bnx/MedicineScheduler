@@ -1,0 +1,17 @@
+﻿<Application x:Class="MedicineScheduler.WPFUI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                                                      >
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Custom/Resources/Colors.xaml"/>
+        <ResourceDictionary Source="/Custom/Resources/ValidationFailure.xaml"/>
+        <ResourceDictionary Source="/Components/WindowChromeComponent.xaml"/>
+        <ResourceDictionary Source="/Custom/Resources/Dimensions.xaml"/>
+        <ResourceDictionary Source="/Custom/Resources/GeometryPath.xaml"/>
+        <ResourceDictionary Source="/Custom/Resources/Styles/ButtonStyle.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>

@@ -1,0 +1,6 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:System="clr-namespace:System;assembly=netstandard">
+  <System:Double x:Key="WindowChromeHeight">35</System:Double>
+  <System:Double x:Key="NavigationMenuItemWidth">120</System:Double>
+</ResourceDictionary>

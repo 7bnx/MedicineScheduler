@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>$(SolutionName).$(MSBuildProjectName)</RootNamespace>
+    <OutputPath>..\_$(Configuration)\$(MSBuildProjectName)</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="set &quot;dir=$(OutputPath)&quot;&#xD;&#xA;&#xD;&#xA;for %25%25I in (&quot;%25dir%25\..&quot;) do set &quot;grandparent=%25%25~fI&quot;&#xD;&#xA;for /D %25%25G in (&quot;$(OutputPath)\..\*_*_wpftmp&quot;) do rmdir /S /Q &quot;%25%25G&quot;&#xD;&#xA;echo %25grandparent%25&#xD;&#xA;&#xD;&#xA;" />
+  </Target>
+
+</Project>

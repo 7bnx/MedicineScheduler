@@ -1,0 +1,50 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:helpers="clr-namespace:MedicineScheduler.WPFUI.Helpers">
+  <Style x:Key="ButtonBaseStyle" TargetType="Button">
+    <Style.Resources>
+      <helpers:BindWrapperSolidColorBrush x:Key="MouseOverDefaultBrushWprapper" Content="{StaticResource WorkingButtonMouseOverBrush}"/>
+    </Style.Resources>
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Border x:Name="border"
+            Padding="{TemplateBinding Padding}"
+            Margin="0" DataContext="{DynamicResource MouseOverDefaultBrushWprapper}"
+            BorderThickness="0"
+            BorderBrush="Transparent"
+            Background="Transparent"
+            CornerRadius="0">
+            
+            <ContentPresenter 
+              TextElement.FontFamily="{TemplateBinding TextElement.FontFamily}"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"/>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="border" Property="Background" Value="{Binding Path=Content}"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+
+  </Style>
+
+  <Style x:Key="WorkingButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonBaseStyle}">
+    <Style.Resources>
+      <helpers:BindWrapperSolidColorBrush x:Key="MouseOverDefaultBrushWprapper" Content="{StaticResource WorkingButtonMouseOverBrush}"/>
+    </Style.Resources>
+  </Style>
+
+  <Style x:Key="ModalButtonStyle" TargetType="Button" BasedOn="{StaticResource  ButtonBaseStyle}">
+    <Style.Resources>
+      <helpers:BindWrapperSolidColorBrush x:Key="MouseOverDefaultBrushWprapper" Content="{StaticResource ModalButtonMouseOverBrush}"/>
+    </Style.Resources>
+  </Style>
+  
+</ResourceDictionary>
