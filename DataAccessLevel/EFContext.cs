@@ -1,5 +1,6 @@
 ﻿using MedicineScheduler.DataAccessLayer.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace MedicineScheduler.DataAccessLayer;
 
@@ -15,26 +16,32 @@ public class EFContext : DbContext
   public DbSet<DosageForm> DosageForms { get; set; }
   public DbSet<Tag> Tags { get; set; }
 
-  public EFContext(DbContextOptions<EFContext> options) : base(options) 
+  public EFContext(DbContextOptions<EFContext> options) : base(options)
   {
 
   }
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
-    modelBuilder.Entity<Tag>()
-      .Property(t => t.TagId).HasMaxLength(25);
-    modelBuilder.Entity<Tag>()
-      .HasKey(t => t.TagId);
-    modelBuilder.Entity<OrderRemains>()
-      .HasOne(or => or.Order)
-      .WithOne(o => o.Remains)
-      .HasForeignKey<OrderRemains>(t => t.OrderId);
-    modelBuilder.Entity<Order>()
-      .HasOne(o => o.Remains)
-      .WithOne(o => o.Order)
-      .HasForeignKey<Order>(t => t.OrderId);
-    modelBuilder.Entity<OrderRemains>()
-      .HasKey(o => o.OrderId);
+    modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+    foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+    {
+      foreach (var entityProperty in entityType.GetProperties())
+      {
+        if (entityProperty.ClrType == typeof(DateTime))
+          entityProperty.SetColumnType("date");
+        if (entityProperty.ClrType == typeof(decimal))
+        {
+          entityProperty.SetPrecision(9);
+          entityProperty.SetScale(2);
+          if (Database.IsSqlite())
+            entityProperty.SetProviderClrType(typeof(double));
+        }
+        if (entityProperty.ClrType.IsEnum)
+          entityProperty.SetProviderClrType(typeof(string));
+      }
+    }
+
     base.OnModelCreating(modelBuilder);
   }
 }
