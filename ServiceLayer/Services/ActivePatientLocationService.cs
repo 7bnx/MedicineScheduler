@@ -22,16 +22,6 @@ public class ActivePatientLocationService : IActivePatientLocationService
       return new(null! as ActivePatientLocationDTO, "Null collection");
     return new(_mapper.ProjectTo<ActivePatientLocationDTO>(collection)?.LastOrDefault());
   }
-  public OperationResult<List<PatientDTO>> GetPatients()
-  {
-    return new(_mapper.ProjectTo<PatientDTO>(_unitOfWork.Patients.GetAll()).ToList());
-  }
-
-  public OperationResult<List<LocationDTO>> GetLocations()
-  {
-    return new(_mapper.ProjectTo<LocationDTO>(_unitOfWork.Locations.GetAll()).ToList());
-  }
-
   public OperationResult<ActivePatientLocationDTO> Set(ActivePatientLocationDTO dto)
   {
 
