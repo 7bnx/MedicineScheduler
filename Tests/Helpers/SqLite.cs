@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.Data.Common;
 
-namespace Tests.Helpers;
+namespace MedicineScheduler.Tests.Helpers;
 
 public static class SqLite
 {

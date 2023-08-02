@@ -13,7 +13,7 @@ public class Order
   public DateTime ExpirationDate { get; set;}
   public DateTime OrderDate { get; set; }
   public decimal PricePerPackage { get; set; }
-  public decimal PriceTotal { get; set; }
+  public decimal PriceTotal { get; private set; }
   public int LocationId { get; set; }
   public Location Location { get; set; } = null!;
   public OrderRemains Remains { get; set; } = null!;
