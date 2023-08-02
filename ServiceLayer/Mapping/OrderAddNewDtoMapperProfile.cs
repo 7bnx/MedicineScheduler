@@ -12,7 +12,7 @@ public class OrderAddNewDTOMapperProfile : Profile
       .ForMember(dst => dst.Medicine, opt => opt.Ignore())
       .ForMember(dst => dst.DosageForm, opt => opt.Ignore())
       .ForMember(dst => dst.Location, opt => opt.MapFrom(src => new Location() { LocationId = src.LocationId}))
-      .ForMember(dst => dst.PriceTotal, opt => opt.MapFrom(src => src.PricePerPackage * src.QuantityPackages))
+      .ForMember(dst => dst.PriceTotal, opt => opt.Ignore())
       .ForMember(dst => dst.Remains, opt => opt.ConvertUsing(new OrderAddNewDTOToOrderRemainsConverter(), src => src));
 
   }

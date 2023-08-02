@@ -11,7 +11,13 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
       .HasOne(o => o.Remains)
       .WithOne(o => o.Order)
       .HasForeignKey<Order>(t => t.OrderId);
-    var tt = builder.Property(o => o.PriceTotal);
 
+    builder
+      .Property(o => o.PriceTotal)
+      .HasComputedColumnSql
+      (
+        sql:$"{nameof(Order.QuantityPackages)} * {nameof(Order.PricePerPackage)}", 
+        stored: true
+      );
   }
 }
