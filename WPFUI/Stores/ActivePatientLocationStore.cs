@@ -14,13 +14,22 @@ public class ActivePatientLocationStore
   public event Action? OnLocationsChanged;
 
   private readonly IActivePatientLocationService _activePatientLocationService;
+  private readonly IPatientService _patientService;
+  private readonly ILocationService _locationService;
   private ActivePatientLocationDTO _currentActive = null!;
   private List<PatientDTO> _patients = null!;
   private List<LocationDTO> _locations = null!;
 
-  public ActivePatientLocationStore(IActivePatientLocationService activePatientLocationService)
+  public ActivePatientLocationStore
+  (
+    IActivePatientLocationService activePatientLocationService,
+    IPatientService patientService,
+    ILocationService locationService
+  )
   {
     _activePatientLocationService = activePatientLocationService;
+    _patientService = patientService;
+    _locationService = locationService;
   }
 
   public OperationResult<ActivePatientLocationDTO> Set(ActivePatientLocationDTO newActivePatientAndLocation)
@@ -53,8 +62,8 @@ public class ActivePatientLocationStore
   }
 
   public IReadOnlyList<PatientDTO> Patients
-    => _patients ??= _activePatientLocationService.GetPatients().Value!;
+    => _patients ??= _patientService.Get().Value!;
 
   public IReadOnlyList<LocationDTO> Locations 
-    => _locations ??= _activePatientLocationService.GetLocations().Value!;
+    => _locations ??= _locationService.Get().Value!;
 }

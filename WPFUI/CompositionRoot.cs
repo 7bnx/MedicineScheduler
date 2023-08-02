@@ -40,6 +40,8 @@ public class CompositionRoot
       .AddSingleton<CloseModalNavigationService>()
       .AddSingleton<IPrescriptionService, PrescriptionService>()
       .AddSingleton<IActivePatientLocationService, ActivePatientLocationService>()
+      .AddSingleton<IPatientService, PatientService>()
+      .AddSingleton<ILocationService, LocationService>()
       .AddSingleton<ActivePatientLocationStore>()
       .AddSingleton<PrescriptionStore>()
       .AddSingleton<IMedicineService, MedicineService>()
